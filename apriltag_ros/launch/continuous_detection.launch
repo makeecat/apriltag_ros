@@ -1,10 +1,12 @@
 <launch>
+  <arg name="mav_name" default="$(env MAV_NAME)"/>
+  <group ns="$(arg mav_name)">
   <!-- set to value="gdbserver localhost:10000" for remote debugging -->
   <arg name="launch_prefix" default="" />
 
   <!-- configure camera input -->
-  <arg name="camera_name" default="/camera_rect" />
-  <arg name="image_topic" default="image_rect" />
+  <arg name="camera_name" default="main_camera" />
+  <arg name="image_topic" default="image_raw" />
   <arg name="queue_size" default="1" />
 
   <!-- apriltag_ros continuous detection node -->
@@ -20,4 +22,5 @@
     <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml"/>
     <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml"/>
   </node>
+  </group>
 </launch>
